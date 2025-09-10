@@ -35,8 +35,10 @@
       text: `TripShield Pass\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`,
       width: 180, height: 180
     });
-
-    // Link to home.html with same details
+    <button onclick="window.location.href=`home.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`">
+  Go to Dashboard
+</button>
+// Link to home.html with same details
     document.getElementById("dashboardBtn").href = 
       `home.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
   </script>
