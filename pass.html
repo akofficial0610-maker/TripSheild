@@ -3,44 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TripShield - Pass</title>
+  <title>TripShield - Digital Tourist Pass</title>
   <style>
-    body { margin:0; display:flex; justify-content:center; align-items:center;
-      height:100vh; font-family:"Segoe UI",sans-serif;
-      background:linear-gradient(135deg,#c33764,#1d2671); color:white; }
-    .box { text-align:center; padding:30px; background:rgba(255,255,255,0.1);
-      border-radius:15px; backdrop-filter:blur(10px); }
-    #qrcode { margin:20px auto; background:white; padding:10px; border-radius:10px; }
-    .btn { display:inline-block; margin-top:20px; padding:10px 20px; background:#28a745; border-radius:8px; text-decoration:none; color:white; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #c33764, #1d2671);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 380px;
+      animation: fadeIn 1s ease-in-out;
+      backdrop-filter: blur(10px);
+    }
+    .logo {
+      font-size: 45px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 5px 0 15px;
+      font-size: 26px;
+      background: linear-gradient(45deg, #ffefba, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 {
+      margin-bottom: 10px;
+      color: #28a745;
+      font-size: 20px;
+    }
+    p {
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+    #qrcode {
+      margin: 20px auto;
+      padding: 12px;
+      background: #fff;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    h3 {
+      margin-top: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #ffefba;
+      white-space: pre-line;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #ddd;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>TripShield Digital Tourist Pass</h1>
+    <div class="logo">🛡️</div>
+    <h1>TripShield</h1>
+
+    <h2>✅ Registration Successful</h2>
+    <p>Here is your Digital Tourist Pass</p>
+
     <div id="qrcode"></div>
-    <p id="details"></p>
-    <a id="dashboardBtn" class="btn">Go to Dashboard</a>
+    <h3 id="details"></h3>
+
+    <!-- Dashboard Button -->
+    <a href="home.html">
+      <button class="btn">Go to Dashboard</button>
+    </a>
+
+    <div class="footer">Powered by D-HAB</div>
   </div>
 
+  <!-- QRCode.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
+    // Get query parameters
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
     const email = params.get("email");
     const phone = params.get("phone");
 
-    document.getElementById("details").innerText = `👤 ${name}\n📧 ${email}\n📱 ${phone}`;
+    // Show details
+    document.getElementById("details").innerText = 
+      `👤 Name: ${name}\n📧 Email: ${email}\n📱 Phone: ${phone}`;
 
+    // Generate QR code
+    const qrData = `TripShield - Digital Tourist Pass\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
     new QRCode(document.getElementById("qrcode"), {
-      text: `TripShield Pass\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`,
-      width: 180, height: 180
+      text: qrData,
+      width: 180,
+      height: 180,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
     });
-    <button onclick="window.location.href=`home.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`">
-  Go to Dashboard
-</button>
-// Link to home.html with same details
-    document.getElementById("dashboardBtn").href = 
-      `home.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
   </script>
 </body>
 </html>
