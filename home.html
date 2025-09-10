@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripShield - Home</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin:0; font-family:"Segoe UI",sans-serif; display:flex; flex-direction:column; height:100vh; }
+    header { display:flex; justify-content:space-between; padding:15px; background:#1d2671; color:white; }
+    #map { flex:1; margin:10px; border-radius:12px; }
+    .sos { text-align:center; padding:20px; }
+    .sos button { padding:15px 40px; font-size:20px; border-radius:50px; border:none;
+      background:linear-gradient(135deg,#ff512f,#dd2476); color:white; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>🛡️ TripShield</div>
+    <div id="username">User</div>
+  </header>
+
+  <div id="map"></div>
+
+  <div class="sos">
+    <button onclick="sendSOS()">🆘 SOS</button>
+  </div>
+
+  <footer style="text-align:center;padding:10px;background:#1d2671;color:white;">
+    Virudhunagar, Tamil Nadu | Smart India Hackathon 2025
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const email = params.get("email");
+    const phone = params.get("phone");
+
+    if(name) document.getElementById("username").innerText = name;
+
+    // Map
+    const map = L.map('map').setView([9.5851,77.9574], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Safe Zone
+    L.circle([9.5851,77.9574],{radius:2000,color:"green"}).addTo(map).bindPopup("Safe Zone");
+    // Tourist
+    L.marker([9.5851,77.9574]).addTo(map).bindPopup("You are here").openPopup();
+
+    function sendSOS(){
+      alert(`🚨 SOS Sent!\nName: ${name}\nPhone: ${phone}\nLocation shared.`);
+    }
+  </script>
+</body>
+</html>
