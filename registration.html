@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripShield - Registration</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin: 0;
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      color: white;
+    }
+    .box {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    input {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border-radius: 8px; border: none;
+    }
+    button {
+      background: #28a745; border: none; color: white;
+      padding: 12px 25px; border-radius: 8px;
+      cursor: pointer; font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>🛡️ Welcome to TripShield</h1>
+    <p>Register to get your Digital Tourist Pass</p>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function registerUser(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+
+      // redirect to pass.html with data
+      window.location.href = `pass.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+    }
+  </script>
+</body>
+</html>
