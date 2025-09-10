@@ -26,56 +26,78 @@
       backdrop-filter: blur(10px);
     }
     .logo { font-size: 45px; margin-bottom: 8px; }
-    h1 { margin:5px 0 15px; font-size:26px; background: linear-gradient(45deg, #ffefba, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h1 {
+      margin: 5px 0 15px;
+      font-size: 26px;
+      background: linear-gradient(45deg, #ffefba, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     h2 { margin-bottom: 10px; color: #28a745; font-size: 20px; }
     p { font-size: 15px; margin-bottom: 15px; }
-    #qrcode { margin: 20px auto; padding: 12px; background: #fff; border-radius: 12px; display: inline-block; }
-    h3 { margin-top: 15px; font-size: 15px; line-height: 1.6; color: #ffefba; white-space: pre-line; }
-    .footer { margin-top: 20px; font-size: 12px; color: #ddd; }
-    button.dashboard-btn {
+    #qrcode {
+      margin: 20px auto;
+      padding: 12px;
+      background: #fff;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    h3 {
       margin-top: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #ffefba;
+      white-space: pre-line;
+    }
+    .footer { margin-top: 20px; font-size: 12px; color: #ddd; }
+    .btn-dashboard {
+      margin-top: 20px;
       padding: 12px 25px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
+      cursor: pointer;
       background: linear-gradient(135deg, #ff9966, #ff5e62);
       color: #fff;
-      font-size: 16px;
-      cursor: pointer;
       transition: 0.3s;
     }
-    button.dashboard-btn:hover {
+    .btn-dashboard:hover {
       background: linear-gradient(135deg, #ff5e62, #ff9966);
       transform: translateY(-2px);
     }
-    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
   </style>
 </head>
 <body>
   <div class="box">
     <div class="logo">🛡️</div>
     <h1>TripShield</h1>
+
     <h2>✅ Registration Successful</h2>
     <p>Here is your Digital Tourist Pass</p>
+
     <div id="qrcode"></div>
     <h3 id="details"></h3>
-    <button class="dashboard-btn" id="dashboardBtn">Go to Dashboard</button>
+
+    <button class="btn-dashboard" onclick="goHome()">Go to Dashboard</button>
+
     <div class="footer">Powered by D-HAB</div>
   </div>
 
   <!-- QRCode.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    // Get query parameters
     const params = new URLSearchParams(window.location.search);
-    const name = params.get("name") || "Tourist";
-    const email = params.get("email") || "tourist@email.com";
-    const phone = params.get("phone") || "0000000000";
+    const name = params.get("name") || "John Doe";
+    const email = params.get("email") || "john@example.com";
+    const phone = params.get("phone") || "1234567890";
 
-    // Show details
     document.getElementById("details").innerText = 
       `👤 Name: ${name}\n📧 Email: ${email}\n📱 Phone: ${phone}`;
 
-    // Generate QR code
     const qrData = `TripShield - Digital Tourist Pass\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
     new QRCode(document.getElementById("qrcode"), {
       text: qrData,
@@ -86,6 +108,9 @@
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    // Dashboard button
-    document.getElementById("dashboardBtn").addEventListener("click", () => {
-      window.location.href = `home.html?name=${enco
+    function goHome() {
+      window.location.href = `home.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+    }
+  </script>
+</body>
+</html>
