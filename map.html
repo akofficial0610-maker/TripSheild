@@ -6,6 +6,10 @@
 <html lang="en">
 
 <head>
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,16 +42,16 @@
             police stations, and emergency locations in real time.
         </p>
 
-        <div class="hero-buttons">
-
-            <a href="#" class="btn primary-btn">
-                Open Map
-            </a>
-
-        </div>
-
     </section>
-<script src="script.js"></script>
+
+    <!-- MAP CONTAINER -->
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="js/map.js"></script>
+
 </body>
 
 </html>
